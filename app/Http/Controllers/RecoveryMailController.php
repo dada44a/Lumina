@@ -11,5 +11,6 @@ class RecoveryMailController extends Controller
         $to="anishdada44@gmail.com";
         $msg="dummy mail";
         $subject="dummy mail";
+        
     }
 }

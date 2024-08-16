@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->text('coursecontent');
             $table->string('thumbnail');
             $table->foreignId('instructor_id')->constrained('instructors');
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
             $table->string('videoUrl');
         });

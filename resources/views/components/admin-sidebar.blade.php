@@ -42,14 +42,19 @@
             <a href="{{route('admin.courses')}}" class="font-[500] text-[#838ea0]">View</a>
         </div>
 
-        <p class=" mb-6 text-[#838ea0] font-[500]">Instructors</p>
         <div class="flex items-center gap-2 mb-6">
             <div class="h-[40px] w-[40px] rounded-xl flex items-center justify-center bg-[#ffffff] drop-shadow-md">
                 <img src="{{asset('img/rating_1322236.png')}}" class="w-[15px] h-[15px]" alt="">
             </div>
-            <a href="{{route('admin.instructor')}}" class="font-[500] text-[#838ea0] ">All</a>
+            <a href="{{route('admin.instructor')}}" class="font-[500] text-[#838ea0] ">Instructors</a>
         </div>
 
+        <div class="flex items-center gap-2 mb-6">
+            <div class="h-[40px] w-[40px] rounded-xl flex items-center justify-center bg-[#ffffff] drop-shadow-md">
+                <img src="{{asset('img/rating_1322236.png')}}" class="w-[15px] h-[15px]" alt="">
+            </div>
+            <a href="{{route('admin.category')}}" class="font-[500] text-[#838ea0] ">Category</a>
+        </div>
         
     </div>
 </div>

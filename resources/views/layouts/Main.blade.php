@@ -16,8 +16,9 @@
             <a href="{{ route('index') }}" class="p-2 font-semibold {{ request()->is('/') ? 'text-blue-500' : 'text-black' }}">Home</a>
 
             <a href="{{ route('courses') }}" class="text-black p-2 font-semibold {{ request()->is('courses') ? 'text-blue-500' : 'text-black' }}">Courses</a>
+            @if(!auth('web')->user()||auth('web')->user()->subscription_type_id==NULL  )
             <a href="{{ route('pricing') }}" class="text-black p-2 font-semibold {{ request()->is('pricing') ? 'text-blue-500' : 'text-black' }}">Pricing</a>
-           
+           @endif
             @auth
                 <form action="{{route('logout')}}" method="post">
                     @csrf

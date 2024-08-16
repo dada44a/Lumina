@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('email')->unique();
+            $table->date('subscription_start')->nullable();
+            $table->date('subscription_end')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

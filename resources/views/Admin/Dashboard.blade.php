@@ -38,13 +38,13 @@
         {{-- Grossing Videos --}}
         <div class="w-[600px] h-[400px] rounded-2xl drop-shadow-lg p-3">
             {{-- Content for Grossing Videos --}}
-            <p class="text-[18px] font-normal text-[#838ea0] ml-4">Grossing Courses</p>
+            <p class="text-[18px] font-normal text-[#838ea0] ml-4">Recent Courses</p>
             <div class="grid grid-rows-5 gap-4 p-2">
-                <div class="p-3 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md">Row 1</div>
-                <div class=" p-3 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md">Row 2</div>
-                <div class=" p-3 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md">Row 3</div>
-                <div class=" p-3 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md">Row 1</div>
-                <div class="p-3 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md">Row 2</div>
+                @foreach ($course as $cors )
+                <div class="p-3 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md">{{$cors->title}}</div>
+                @endforeach
+                {{$course->links()}}
+                
             </div>
             
         </div>
@@ -53,56 +53,27 @@
         <div class="w-full h-[400px] rounded-2xl drop-shadow-lg p-4">
             <p class="text-[18px] font-normal text-[#838ea0]">Recent Requests</p>
             <div class="grid grid-rows-5 gap-4 p-2">
+                @foreach ($subscription as $sub)
                 <div class="p-3  border-b-2 border-[#3fafc3] drop-shadow-sm flex justify-between">
-                    <p>Anish Ghimire</p> 
+                    <p>{{$sub->username}}</p> 
                     <div class="flex justify-between gap-5">
-                        <a href="">Link</a>
-                        <div>
-                            <button class="text-[#eb768b]">Accept</button>
-                            <button>Reject</button>
+                        <a href="{{$sub->imageUrl}}">Link</a>
+                        <div class="flex gap-3">
+                            <form action="{{route('admin.subscribe.accepted')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="username" value="{{$sub->username}}">
+                                <input type="hidden" name="type" value="{{$sub->subscription_type}}">
+                                <button class="text-[#eb768b]">Accept</button>
+                            </form>
+                            <form action="{{route('admin.subscribe.rejected',$sub->username)}}" method="POST">
+                                @csrf
+                                <button>Reject</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class=" p-3  border-b-2 border-[#3fafc3] drop-shadow-sm flex justify-between">
-                    <p>Raj Kiran Giri</p>
-                    <div class="flex justify-between gap-5">
-                        <a href="">Link</a>
-                        <div>
-                            <button class="text-[#eb768b]">Accept</button>
-                            <button>Reject</button>
-                        </div>
-                    </div>
-                </div>
-                <div class=" p-3 border-b-2 border-[#3fafc3] drop-shadow-sm flex justify-between">
-                    <p>Shirshak K.C</p>
-                    <div class="flex justify-between gap-5">
-                        <a href="">Link</a>
-                        <div>
-                            <button class="text-[#eb768b]">Accept</button>
-                            <button>Reject</button>
-                        </div>
-                    </div>
-                </div>
-                <div class=" p-2 border-b-2 border-[#3fafc3] drop-shadow-sm flex justify-between "><p>Laxmi Chaulagain</p>
-                    <div class="flex justify-between gap-5">
-                        <a href="">Link</a>
-                        <div>
-                            <button class="text-[#eb768b]">Accept</button>
-                            <button>Reject</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-3 border-b-2 border-[#3fafc3] drop-shadow-sm flex justify-between ">
-                    <p>Kremisha Oli</p>
-                    <div class="flex justify-between gap-5 ">
-                        <a href="">Link</a>
-                        <div>
-                            <button class="text-[#eb768b]">Accept</button>
-                            <button>Reject</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+    </div>
         </div>
     </div>
 </div>

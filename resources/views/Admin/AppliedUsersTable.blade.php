@@ -2,14 +2,14 @@
 
 @section('content')
 
-@if (session('status'))
+
+<div class="ml-[295px] mt-[50px] p-2 flex flex-col items-center justify-center">
+    @if (session('status'))
 <div class="border-2 border-[#5293e2] p-3 bg-[#5293e2] rounded-2xl mb-6">
-    <p class="text-blue-300">{{ session('status') }}</p>
+    <p class="text-blue-300 bg-[#5293e2]">{{ session('status') }}</p>
 </div>
     @endif
 
-<div class="ml-[295px] mt-[50px] p-2 flex items-center justify-center">
-    
     <div class="w-[79vw] h-[600px] rounded-3xl p-5 drop-shadow-lg bg-white mt-6">
         
             <p class="text-[18px] font-normal text-[#838ea0] ml-3">Recent Requests</p>

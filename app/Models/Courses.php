@@ -13,7 +13,8 @@ class Courses extends Model
         'description',
         'instructor_id',
         'thumbnail',
-        'videoUrl'
+        'videoUrl',
+        'category_id'
         
     ];
 

@@ -23,7 +23,9 @@ use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminUserTableController;
 use App\Http\Controllers\AdminControllers\AdminInstructorController;
 use App\Http\Controllers\AdminControllers\AdminAppliedUserController;
+use App\Http\Controllers\AdminControllers\CategoryUpload;
 use App\Http\Controllers\RecoveryMailController;
+use App\Http\Middleware\DateChecker;
 use App\Http\Middleware\UserRestrict;
 
 // index route
@@ -69,6 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Admin middleware group
     Route::middleware([RedirectIfNotAdmin::class])->group(function () {
+
         // Dashboard route
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
@@ -87,7 +90,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Instructor management routes
         Route::get('instructor', [AdminInstructorController::class, 'index'])->name('instructor');
         Route::post('instructor/upload', [AdminInstructorController::class, 'store'])->name('instructor.upload');
-        Route::post('/admin/instructor/remove/{email}', [AdminInstructorController::class, 'remove'])->name('instructor.remove');
+        Route::post('instructor/remove/{email}', [AdminInstructorController::class, 'remove'])->name('instructor.remove');
+
+
+        Route::get('category', [CategoryUpload::class, 'index'])->name('category');
+        Route::post('category/upload', [CategoryUpload::class, 'store'])->name('category.upload');
+        Route::post('category/remove/{title}', [CategoryUpload::class, 'remove'])->name('category.remove');
+
 
         // Subscription management routes
         Route::post('subscribe/accept', [AdminAppliedUserController::class, 'store'])->name('subscribe.accepted');

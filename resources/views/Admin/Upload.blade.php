@@ -3,12 +3,12 @@
 @section('content')
 
 
-<div class="ml-[310px] mt-[50px] p-5">
+<div class="ml-[310px] mt-[50px] p-5 w-[80vw]">
     @if (session('status'))
-<div class="border-2 border-[#5293e2] p-3 bg-[#5293e2] rounded-2xl mb-6">
+<div class="border-2 border-[#5293e2] p-3 bg-[#5293e2] rounded-2xl mb-6 2-full">
     <p class="text-blue-300 bg-[#5293e2]">{{ session('status') }}</p>
-</div>
-@endif
+    </div>
+    @endif
     <div class="flex justify-center h-[100vh] w-[60vw]">
         <form action="{{ route('admin.upload') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-5">
             @csrf
@@ -31,6 +31,11 @@
             <div class="flex flex-col">
                 <label for="instructor" class="text-sm font-medium text-gray-700">Instructor</label>
                 <input type="text" id="instructor" name="instructor" placeholder="Instructor email" class="border-2 border-gray-400 rounded-2xl p-2 w-full">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="Category" class="text-sm font-medium text-gray-700">Category</label>
+                <input type="text" id="Category" name="category" placeholder="Category" class="border-2 border-gray-400 rounded-2xl p-2 w-full">
             </div>
 
             <div class="flex flex-col">

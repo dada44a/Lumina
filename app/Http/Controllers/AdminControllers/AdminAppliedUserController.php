@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\subscription_applier;
 use App\Models\SubscriptionPlan;
+use Carbon\Carbon;
 
 class AdminAppliedUserController extends Controller
 {
@@ -21,6 +22,20 @@ class AdminAppliedUserController extends Controller
         $user = User::where('username',$request->username)->first();
         $plan = SubscriptionPlan::where('id_code',$request->type)->first();
         $user->subscription_type_id= $plan->id;
+        $user->subscription_start= Carbon::now();
+        if($plan->id===1)
+        {
+            $user->subscription_end= Carbon::now()->addDay(1);
+        }
+        else if($plan->id===2)
+        {
+            $user->subscription_end= Carbon::now()->addDay(30); 
+        }
+        else 
+        {
+            $user->subscription_end= Carbon::now()->addDay(365);
+        }
+        
         $user->save();
         subscription_applier::where('username',$request->username)->delete();
         return back()->with('status','update sucessfull');
