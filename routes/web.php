@@ -23,6 +23,8 @@ use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminUserTableController;
 use App\Http\Controllers\AdminControllers\AdminInstructorController;
 use App\Http\Controllers\AdminControllers\AdminAppliedUserController;
+use App\Http\Controllers\RecoveryMailController;
+use App\Http\Middleware\UserRestrict;
 
 // index route
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -46,10 +48,10 @@ Route::post('/logout', [SignOutController::class,'store'])->name('logout');
 
 
 
-Route::get('/course/{course}',[CourseViewController::class,'index'])->name('courseinfo');
+Route::get('/course/{course}',[CourseViewController::class,'index'])->name('courseinfo')->middleware('auth');
 Route::post('/course/{course}',[CourseViewController::class,'store']);
 
-Route::post('/course/{course}/watch',[CoursePlayController::class,'store'])->name('courseplay');
+Route::middleware([UserRestrict::class])->post('/course/{course}/watch',[CoursePlayController::class,'store'])->name('courseplay');
 
 Route::post('/subscribe/{plan}',[SubscribeController::class,'index'])->name('subscribe')->middleware('auth');
 Route::post('/subscribe/{plan}/processing',[SubscribeController::class,'store'])->name('subscribe_process')->middleware('auth');
@@ -92,5 +94,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('subscribe/{username}/reject', [AdminAppliedUserController::class, 'remove'])->name('subscribe.rejected');
     });
 });
+
+Route::get('sendmail',[RecoveryMailController::class,'sendMail'])
 
 ?>

@@ -19,12 +19,10 @@
             <a href="{{ route('pricing') }}" class="text-black p-2 font-semibold {{ request()->is('pricing') ? 'text-blue-500' : 'text-black' }}">Pricing</a>
            
             @auth
-            <a href="{{route('library')}}" class="text-black p-2 font-semibold {{ request()->is('library') ? 'text-blue-500' : 'text-black' }}">Library</a>
-                <a href="" class="text-black p-2 font-semibold">Accounts</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf
-                <button><p class="p-2 font-semibold">Sign Out</p></button>
-            </form> 
+                    <button><p class="p-2 font-semibold">Sign Out</p></button>
+                </form> 
             @endauth
             @guest
             <a href="{{route('login')}}" class="text-black p-2 font-semibold">Login</a>
@@ -33,7 +31,7 @@
         </div>
     </div>
     @yield('content')
-    @yield('script')
+
 
     <footer class="h-[30px] flex items-center justify-center rounded-[30px] text-gray-400">
         <p class="text-center">© Copyright - dada44, 2024</p>
