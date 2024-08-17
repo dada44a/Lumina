@@ -9,7 +9,7 @@ class CoursePlayController extends Controller
 {
     public function store(Courses $course)
     {
-
+        
         return view('course',['course'=>$course]);
     }
 }

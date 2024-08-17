@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Subscribe;
+use App\Http\Middleware\DateChecker;
+use App\Http\Middleware\UserRestrict;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ForgotPassword;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CourseController;
@@ -13,20 +16,22 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\CoursePlayController;
 use App\Http\Controllers\CourseViewController;
+use App\Http\Controllers\RecoveryMailController;
 use App\Http\Controllers\SubscriptionConfirmController;
+use App\Http\Controllers\AdminControllers\CategoryUpload;
 use App\Http\Controllers\AdminControllers\AllVideosController;
 use App\Http\Controllers\AdminControllers\AdminLoginController;
 use App\Http\Controllers\AdminControllers\AdminUploadController;
+use App\Http\Controllers\AdminControllers\ChangeEmailController;
+use App\Http\Controllers\AdminControllers\AdminAccountController;
 use App\Http\Controllers\AdminControllers\AdminSignOutController;
 use App\Http\Controllers\AdminControllers\AdminRegisterController;
 use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminUserTableController;
+use App\Http\Controllers\AdminControllers\ChangePasswordController;
 use App\Http\Controllers\AdminControllers\AdminInstructorController;
 use App\Http\Controllers\AdminControllers\AdminAppliedUserController;
-use App\Http\Controllers\AdminControllers\CategoryUpload;
-use App\Http\Controllers\RecoveryMailController;
-use App\Http\Middleware\DateChecker;
-use App\Http\Middleware\UserRestrict;
+
 
 // index route
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -40,6 +45,11 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::get('/signup', [RegisterController::class, 'index'])->name('signup')->middleware('guest');
 Route::post('/signup', [RegisterController::class, 'store']);
    
+Route::get('forget',[ForgotPassword::class,'index'])->name('forget.password');
+Route::post('forget',[ForgotPassword::class,'store']);
+
+Route::get('forget/{token}',[ForgotPassword::class,'recover'])->name('forget.password.recover');
+Route::post('forget/{token}',[ForgotPassword::class,'recovery']);
 
 Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 
@@ -68,6 +78,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('login', [AdminLoginController::class, 'store'])->name('login.post');
 
     Route::post('signout', [AdminSignOutController::class, 'store'])->name('signout');
+ 
 
     // Admin middleware group
     Route::middleware([RedirectIfNotAdmin::class])->group(function () {
@@ -100,10 +111,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Subscription management routes
         Route::post('subscribe/accept', [AdminAppliedUserController::class, 'store'])->name('subscribe.accepted');
-        Route::post('subscribe/{username}/reject', [AdminAppliedUserController::class, 'remove'])->name('subscribe.rejected');
+        Route::post('subscribe/{username}/reject', [AdminAppliedUserController::class, 'remove'])->name('subscribe.rejected'); 
+
+        Route::get('accounts',[AdminAccountController::class,'index'])->name('accounts');
+        Route::get('accounts/change/password',[ChangePasswordController::class,'index'])->name('accounts.change.password');
+        Route::post('accounts/change/password',[ChangePasswordController::class,'store']);
+        
+        
+        Route::get('accounts/change/email',[ChangeEmailController::class,'index'])->name('accounts.change.email');
+        Route::post('accounts/change/email',[ChangeEmailController::class,'store'])->name('accounts.change.email');
     });
 });
 
-Route::get('sendmail',[RecoveryMailController::class,'sendMail'])
+Route::get('sendmail/{token}/{email}',[RecoveryMailController::class,'sendMail'])->name('sendmail');
 
 ?>

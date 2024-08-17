@@ -8,12 +8,12 @@
         <div class="w-[550px] h-[150px] ml-[20px] rounded-2xl bg-white drop-shadow-lg flex items-center justify-between p-4">
             <div class="p-5">
                 <p class="text-[30px] font-[500] text-[#eb768b]">Hola! Chief</p>
-                <div class="flex gap-2 mt-2">
-                    <button type="submit" class="text-[14px] text-[#838ea0] ">Account</button>
+                <div class="flex gap-2 mt-2 items-center">
+                    <a href="{{route('admin.accounts')}}" class="text-[14px] text-[#838ea0] ">Account</a>
                     <form action="{{route('admin.signout')}}" method="POST">
                         @csrf
                     <button type="submit" class="text-[14px] text-[#838ea0] ">SignOut</button>
-                </form>
+                    </form>
                 </div>
             </div>
             <div class="bg-yellow-300 drop-shadow-lg w-[90px] h-[90px] flex items-center justify-center rounded-2xl">

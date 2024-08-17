@@ -12,13 +12,15 @@ use Illuminate\Queue\SerializesModels;
 class PasswordRecovery extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $msg;
+    public $sub;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($msg,$sub)
     {
-        //
+        $this->msg= $msg;
+        $this->sub=$sub;
     }
 
     /**
@@ -27,7 +29,7 @@ class PasswordRecovery extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Password Recovery',
+            subject: $this->sub,
         );
     }
 
@@ -36,9 +38,8 @@ class PasswordRecovery extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'view.name',
-        );
+        return (new Content)
+      ->view('mail',['msg'=>$this->msg]);
     }
 
     /**

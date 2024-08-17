@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Password Recover</h1>
+    <p>{{$msg}}</p>
     <p>Do not reply this mail.</p>
 </body>
 </html>

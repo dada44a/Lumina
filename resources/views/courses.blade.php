@@ -23,7 +23,7 @@
             @foreach ($courses as $course)
             <div class="rounded-lg ml-2">
                 <div class="">
-                    <img src="{{$course->thumbnail}}" class="w-full h-[150px] rounded-md" width="400px"  class=" w-[200px]" alt="{{ $course->title }}">
+                    <img src="{{$course->thumbnail}}" class="w-full h-[150px] rounded-md" width="400px"  class="" alt="{{ $course->title }}">
 
                     
                 </div>

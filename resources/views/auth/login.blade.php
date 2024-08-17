@@ -19,7 +19,7 @@
           <div class="flex items-center justify-between">
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
             <div class="text-sm">
-              <a href="#" class="font-semibold text-yellow-500 hover:text-yellow-400">Forgot password?</a>
+              <a href="{{route('forget.password')}}" class="font-semibold text-yellow-500 hover:text-yellow-400">Forgot password?</a>
             </div>
           </div>
           <div class="mt-2">

@@ -24,7 +24,9 @@
                 <tr class="border-b-2 border-[#3fafc3] p-5"><td class="p-2 text-left text-[#838ea0]">1</td>
                     <td class="p-3 text-left text-[#838ea0]">{{$user->name}}</td>
                     <td class="p-3 text-left text-[#838ea0]">{{$user->email}}</td>    
-                    <td class="p-3 text-left text-[#838ea0]">{{$user->subscription_type_id}}</td>            
+                    <td class="p-3 text-left text-[#838ea0]">{{$user->subscription_type_id}}</td> 
+                    <td class="p-3 text-left text-[#838ea0]">{{$user->subscription_start}}</td>   
+                    <td class="p-3 text-left text-[#838ea0]">{{$user->subscription_end}}</td>         
                 </tr>
                 @endforeach
                 

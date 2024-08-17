@@ -19,20 +19,26 @@ class LoginController extends Controller
             return back()->with('status','invalid credentials');
         }
         else{
-            $user = User::where('email',$request->email);
-            if(Carbon::now()->greaterThan($user->subscription_end)  )
-        {
-            $user->subscription_type_id= NULL;
-            $user->subscription_start= NULL;
-            $user->subscription_end=NULL;
-            $user->save();
-            return redirect()->route('courses');
-        }
-        else
-        {
-            return redirect()->route('courses');
-        }
-            
+            $user = User::where('email',$request->email)->first();
+            if($user->subscription_end!= NULL)
+            {
+                    if(Carbon::now()->greaterThanOrEqualTo($user->subscription_end)  )
+                {
+                    $user->subscription_type_id= NULL;
+                    $user->subscription_start= NULL;
+                    $user->subscription_end=NULL;
+                    $user->save();
+                    return redirect()->route('courses');
+                }
+                else
+                {
+                    return redirect()->route('courses');
+                }
+
+            }
+            else{
+                return redirect()->route('courses');
+            }
         }
     }
 }
