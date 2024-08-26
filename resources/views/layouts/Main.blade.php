@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lumina</title>
     @vite('resources/css/app.css')
+    
 </head>
 <body>
     <div class="flex w-full justify-between p-2">
@@ -35,7 +36,7 @@
         </div>
     </div>
     @yield('content')
-
+    @yield('scripts')
 
     <footer class="h-[30px] flex items-center justify-center rounded-[30px] text-gray-400">
         <p class="text-center">© Copyright - dada44, 2024</p>

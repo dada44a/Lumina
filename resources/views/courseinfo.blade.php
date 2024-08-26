@@ -18,10 +18,11 @@
             @endif
             </div>
 
-            <div class="w-[1000px] min-h-[250px] rounded-[30px] p-4 bg-gray-200">
+            <div id="course-container" class="w-[1000px] h-[190px] rounded-[30px] p-4 bg-gray-200">
                 <div>
                     <h1 class="font-bold text-[28px] text-gray-700">{{$course->title}}</h1>
-                    <p>{{$course->description}}</p>
+                    <p id="course-description" class="overflow-clip h-[50px]">{{$course->description}}</p>
+                    <a id="read-more" href="" class="inline">Read More</a>
                 </div>
 
             </div>
@@ -33,4 +34,36 @@
         </div></div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+const button = document.getElementById('read-more');
+const description = document.getElementById('course-description');
+const container = document.getElementById('course-container');
+let status = false;
+button.addEventListener('click', (e) => {
+    e.preventDefault();
+    if(!status){
+        description.classList.remove('overflow-clip');
+        container.classList.remove('h-[190px]');
+        container.classList.add('min-h-[250px]');
+        description.classList.remove('h-[50px]');
+        description.classList.add('min-h-[250px]');
+
+        status=true;
+        button.innerHTML = `Read Less`;
+    }
+    else{
+        description.classList.add('overflow-clip'); 
+        container.classList.remove('min-h-[250px]');
+        container.classList.add('h-[190px]');
+        description.classList.remove('min-h-[250px]');
+        description.classList.add('h-[50px]');
+        button.innerHTML = `Read More`;
+        status=false;
+    }
+
+});
+</script>
 @endsection

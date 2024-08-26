@@ -41,7 +41,7 @@
             <p class="text-[18px] font-normal text-[#838ea0] ml-4">Recent Courses</p>
             <div class="grid grid-rows-5 gap-4 p-2">
                 @foreach ($course as $cors )
-                <div class="p-3 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md">{{$cors->title}}</div>
+                <div class="p-2 rounded-xl border-b-2 border-[#c33f76] drop-shadow-md h-[60px] overflow-clip text-clip ">{{$cors->title}}</div>
                 @endforeach
                 {{$course->links()}}
                 
